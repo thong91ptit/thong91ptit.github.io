@@ -7,7 +7,7 @@ const fileUploadInput = document.getElementById('file-upload');
 const cameraSection = document.getElementById('camera-section'); 
 const previewImg = document.getElementById('uploaded-image-preview');
 
-const MODEL_URL = 'plant_model_js/model.json'; 
+const MODEL_URL = './plant_model_js/model.json'; 
 const IMAGE_SIZE = 256; 
 
 let model;
