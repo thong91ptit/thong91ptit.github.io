@@ -1,35 +1,78 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nhận diện bệnh cây 🌿</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-  <script src="plant_model_js/labels.js"></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLANT DISEASE CLASSIFIER</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🌱 Hệ thống nhận diện bệnh cây</h1>
-  
-  <div id="camera-section">
-    <video id="camera" autoplay playsinline></video>
-    
-    <img id="uploaded-image-preview" style="display:none;" />
-    
-    <canvas id="snapshot" style="display:none"></canvas>
-  </div>
-  
-  <div id="controls">
-    <button id="capture">📸 Chụp ảnh</button>
-    
-    <label for="file-upload" class="custom-file-upload">
-      Tải ảnh lên
-    </label>
-    <input type="file" id="file-upload" accept="image/*" style="display: none;">
-  </div>
-  
-  <div id="result">👉 Hãy chụp hoặc tải ảnh để phân tích</div>
-  
-  <script src="script.js"></script>
+    <h1>🍀 Nhận biết cây bệnh</h1>
+    <hr>
+
+    <div class="camera-controls">
+        <button id="activate-camera-btn" class="btn upload-file font-weight-500">
+            <span class="upload-btn">
+                <i class="material-icons d-block font-50 pb-2">photo_camera</i>
+                <p>Kích hoạt Camera</p>
+            </span>
+        </button>
+        
+        <button id="capture-image-btn" class="btn upload-file font-weight-500" style="display: none; margin-top: 10px;">
+            <span class="upload-btn">
+                <i class="material-icons d-block font-50 pb-2">camera</i>
+                <p>Chụp ảnh</p>
+            </span>
+        </button>
+    </div>
+
+    <video id="camera-stream" autoplay playsinline></video>
+    <canvas id="camera-canvas" style="display: none;"></canvas>
+
+    <div class="upload-btn-wrapper">
+        <button class="btn upload-file font-weight-500">
+            <span class="upload-btn">
+                <i class="material-icons d-block font-50 pb-2">cloud_upload</i>
+                <p id="choose-text-1">Chọn ảnh lá cây</p>
+            </span>
+            <span class="upload-select-button" id="blankFile-1">
+                *Hỗ trợ .png, .jpg, .jpeg, .jfif
+            </span>
+            <span class="success-1">
+                <i class="material-icons text-success">check</i>
+            </span>
+        </button>
+        <input type="file" name="uploadImage" id="uploadImage">
+    </div>
+
+    <div class="row">
+        <div class="box">
+            <img src="" alt="Ảnh lá cây" id="image" width="224" height="224">
+        </div>
+
+        <div class="box box-result">
+            <div class="init_status"></div>
+            <div>
+                <h2>Bệnh của cây: <span class="pred_class"></span></h2>
+                
+            </div>
+            <div class="accuracy">
+                <div class="progress" id="progress">
+                    <div class="inner">
+                      
+                    </div>
+                  </div>
+
+            </div>
+            <p> ĐỘ CHÍNH XÁC: <b><span class="confidence"></span></b> %</p>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/2.0.1/tf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
